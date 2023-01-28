@@ -1,0 +1,19 @@
+{
+    "name": "jankx/gutenberg",
+    "description": "The Block Editor extension for WordPress and beyond",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Jankx\\Gutenberg\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Puleeno Nguyen",
+            "email": "puleeno@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
