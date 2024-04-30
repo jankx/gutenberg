@@ -6,7 +6,10 @@
     "autoload": {
         "psr-4": {
             "Jankx\\Gutenberg\\": "src/"
-        }
+        },
+        "files": [
+            "./bootstrap.php"
+        ]
     },
     "authors": [
         {
