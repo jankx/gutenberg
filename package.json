@@ -1,0 +1,28 @@
+{
+  "name": "@jankx/gutenberg",
+  "version": "1.0.0",
+  "description": "The Block Editor extension for WordPress and beyond",
+  "main": "assets/src/index.js",
+  "scripts": {
+    "build": "run-p build:*",
+    "build:pro": "wp-scripts build ",
+    "start": "wp-scripts start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jankx/gutenberg.git"
+  },
+  "author": "Puleeno Nguyen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jankx/gutenberg/issues"
+  },
+  "homepage": "https://github.com/jankx/gutenberg#readme",
+  "devDependencies": {
+    "@wordpress/scripts": "^28.0.0",
+    "npm-run-all": "^4.1.5"
+  },
+  "dependencies": {
+    "@wordpress/hooks": "^4.0.0"
+  }
+}

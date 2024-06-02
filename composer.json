@@ -18,5 +18,8 @@
         }
     ],
     "minimum-stability": "dev",
-    "require": {}
+    "require": {
+        "jankx/widget": "*",
+        "jankx/helpers": "^1.0"
+    }
 }
