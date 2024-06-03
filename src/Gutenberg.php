@@ -31,6 +31,11 @@ class Gutenberg
     {
     }
 
+    public static function getRootPath()
+    {
+        return dirname(JANKX_GUTENBERG_BOOT_FILE);
+    }
+
     /**
     * Retrieves the template files from the theme.
     *
@@ -65,12 +70,14 @@ class Gutenberg
         $stylesheet = get_stylesheet();
         $template   = get_template();
         $themes     = array(
-           $stylesheet => get_stylesheet_directory(),
+            'jankx' => self::getRootPath(),
+            $stylesheet => get_stylesheet_directory(),
         );
        // Add the parent theme if it's not the same as the current theme.
         if ($stylesheet !== $template) {
             $themes[ $template ] = get_template_directory();
         }
+
         $template_files = array();
         foreach ($themes as $theme_slug => $theme_dir) {
             $template_base_paths  = get_block_theme_folders($theme_slug);
@@ -110,6 +117,7 @@ class Gutenberg
                    'type'  => $template_type,
                 );
 
+
                 if ('wp_template_part' === $template_type) {
                     $candidate = _add_block_template_part_area_info($new_template_item);
                     if (! isset($area) || ( isset($area) && $area === $candidate['area'] )) {
@@ -119,6 +127,7 @@ class Gutenberg
 
                 if ('wp_template' === $template_type) {
                     $candidate = _add_block_template_info($new_template_item);
+
                     if (
                         ! $post_type ||
                         ( $post_type && isset($candidate['postTypes']) && in_array($post_type, $candidate['postTypes'], true) )
@@ -128,6 +137,7 @@ class Gutenberg
                 }
             }
         }
+
 
         return array_values($template_files);
     }
@@ -146,8 +156,8 @@ class Gutenberg
  */
     public static function build_block_template_result_from_file($template_file, $template_type)
     {
-        $default_template_types = get_default_block_template_types();
-        $theme                  = get_stylesheet();
+        $default_template_types   = get_default_block_template_types();
+        $theme                    = get_stylesheet();
 
         $template                 = new WP_Block_Template();
         $template->id             = $theme . '//' . $template_file['slug'];
@@ -189,7 +199,7 @@ class Gutenberg
         return $template;
     }
 
-    public function changeTemplatesPaths($block_template, $id, $template_type)
+    public function changeTemplatesPaths($block_template, $query, $template_type)
     {
         $post_type     = isset($query['post_type']) ? $query['post_type'] : '';
         $wp_query_args = array(
