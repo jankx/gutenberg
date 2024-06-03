@@ -2,10 +2,7 @@
 
 namespace Jankx\Gutenberg;
 
-use Jankx;
 use Jankx\Gutenberg\Traits\CustomWordPressStructure;
-use WP_Block_Template;
-use WP_Query;
 
 class Gutenberg
 {
