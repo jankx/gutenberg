@@ -2,6 +2,7 @@
 
 namespace Jankx\Gutenberg;
 
+use Jankx;
 use WP_Block_Template;
 use WP_Query;
 
@@ -70,16 +71,16 @@ class Gutenberg
         $stylesheet = get_stylesheet();
         $template   = get_template();
         $themes     = array(
-            'jankx' => self::getRootPath(),
             $stylesheet => get_stylesheet_directory(),
         );
        // Add the parent theme if it's not the same as the current theme.
         if ($stylesheet !== $template) {
             $themes[ $template ] = get_template_directory();
         }
+        $themes[Jankx::ENGINE_ID] = self::getRootPath();
 
         $template_files = array();
-        foreach ($themes as $theme_slug => $theme_dir) {
+        foreach (apply_filters('jankx/gutenberg/directories', $themes) as $theme_slug => $theme_dir) {
             $template_base_paths  = get_block_theme_folders($theme_slug);
             $theme_template_files = _get_block_templates_paths($theme_dir . '/' . $template_base_paths[ $template_type ]);
             foreach ($theme_template_files as $template_file) {
