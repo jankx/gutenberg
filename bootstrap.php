@@ -12,6 +12,7 @@ class Jankx_Gutenberg_Bootstraper {
     public function __construct()
     {
         add_theme_support('block-templates');
+        add_theme_support('block-template-parts');
 
         // load helpers
         require_once dirname(__FILE__) . '/helpers.php';
