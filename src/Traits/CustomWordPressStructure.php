@@ -4,6 +4,7 @@ namespace Jankx\Gutenberg\Traits;
 
 use Jankx;
 use Jankx\Gutenberg\Gutenberg;
+use Jankx\TemplateAndLayout;
 use WP_Block_Template;
 use WP_Query;
 
@@ -172,8 +173,50 @@ trait CustomWordPressStructure
         return $template;
     }
 
+    protected function checkTemplatesIsExistsInTheme($templates)
+    {
+        $pre = apply_filters('jankx/gutenberg/precheck-templates', null);
+        if (!is_null($pre)) {
+            return $pre;
+        }
+
+        $templateFiles = [];
+        $templateFiles = array_map(function ($template) {
+            $files = [
+                get_stylesheet_directory() . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . $template . '.html',
+                get_stylesheet_directory() . DIRECTORY_SEPARATOR . 'block-templates' . DIRECTORY_SEPARATOR . $template . '.html'
+            ];
+
+            if (is_child_theme()) {
+                get_template_directory() . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . $template . '.html';
+                get_template_directory() . DIRECTORY_SEPARATOR . 'block-templates' . DIRECTORY_SEPARATOR . $template . '.html';
+            }
+            return $files;
+        }, $templates);
+        foreach ($templateFiles as $files) {
+            foreach ($files as $f) {
+                if (file_exists($f)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public function changeTemplatesPaths($block_template, $query, $template_type)
     {
+        $templateAndLayout = TemplateAndLayout::get_instance();
+        $pageType = $templateAndLayout->loadPageType();
+        $method = 'get_' . $pageType . '_templates';
+
+        if (!method_exists($templateAndLayout, $method)) {
+            return $block_template;
+        }
+        $templates = call_user_func([$templateAndLayout, $method]);
+        if ($this->checkTemplatesIsExistsInTheme($templates)) {
+            return $block_template;
+        }
+
         $post_type     = isset($query['post_type']) ? $query['post_type'] : '';
         $wp_query_args = array(
             'post_status'         => array( 'auto-draft', 'draft', 'publish' ),
@@ -274,7 +317,8 @@ trait CustomWordPressStructure
     }
 
 
-    public function wp_is_block_theme($path, $file) {
+    public function wp_is_block_theme($path, $file)
+    {
         var_dump(did_action('sanitize_comment_cookies'));
         return $path;
     }
