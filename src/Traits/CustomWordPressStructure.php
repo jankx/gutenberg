@@ -206,8 +206,8 @@ trait CustomWordPressStructure
     public function changeTemplatesPaths($block_template, $query, $template_type)
     {
         $templateAndLayout = TemplateAndLayout::get_instance();
-        $pageType = $templateAndLayout->loadPageType();
-        $method = 'get_' . $pageType . '_templates';
+        $pageType          = $templateAndLayout->detectCurrentPageType();
+        $method            = 'get_' . $pageType . '_templates';
 
         if (!method_exists($templateAndLayout, $method)) {
             return $block_template;
