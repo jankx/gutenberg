@@ -315,11 +315,4 @@ trait CustomWordPressStructure
 
         return apply_filters('get_block_templates', $query_result, $query, $template_type);
     }
-
-
-    public function wp_is_block_theme($path, $file)
-    {
-        var_dump(did_action('sanitize_comment_cookies'));
-        return $path;
-    }
 }
