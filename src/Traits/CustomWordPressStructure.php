@@ -2,7 +2,6 @@
 
 namespace Jankx\Gutenberg\Traits;
 
-use Jankx;
 use Jankx\Gutenberg\Gutenberg;
 use Jankx\TemplateAndLayout;
 use WP_Block_Template;
@@ -42,20 +41,14 @@ trait CustomWordPressStructure
         $post_type        = isset($query['post_type']) ? $query['post_type'] : '';
 
         $stylesheet = get_stylesheet();
-        $template   = get_template();
         $themes     = array(
-            $stylesheet => get_stylesheet_directory(),
+            $stylesheet => Gutenberg::getRootPath()
         );
-       // Add the parent theme if it's not the same as the current theme.
-        if ($stylesheet !== $template) {
-            $themes[ $template ] = get_template_directory();
-        }
-        $themes[Jankx::ENGINE_ID] = Gutenberg::getRootPath();
-
         $template_files = array();
         foreach (apply_filters('jankx/gutenberg/directories', $themes) as $theme_slug => $theme_dir) {
             $template_base_paths  = get_block_theme_folders($theme_slug);
             $theme_template_files = _get_block_templates_paths($theme_dir . '/' . $template_base_paths[ $template_type ]);
+
             foreach ($theme_template_files as $template_file) {
                 $template_base_path = $template_base_paths[ $template_type ];
                 $template_slug      = substr(
@@ -111,7 +104,6 @@ trait CustomWordPressStructure
                 }
             }
         }
-
 
         return array_values($template_files);
     }
