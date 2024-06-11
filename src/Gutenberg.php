@@ -40,6 +40,7 @@ class Gutenberg
     public function boot()
     {
         add_filter('pre_get_block_templates', [$this, 'changeTemplatesPaths'], 9999, 3);
+        add_filter('pre_get_block_file_template', [$this, 'get_block_file_template'], 9999, 3);
     }
 
     /**

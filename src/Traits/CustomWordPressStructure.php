@@ -41,9 +41,11 @@ trait CustomWordPressStructure
         $area             = isset($query['area']) ? $query['area'] : null;
         $post_type        = isset($query['post_type']) ? $query['post_type'] : '';
 
-        $themes = array(
-            Jankx::ENGINE_ID => Gutenberg::getRootPath()
+        $stylesheet = get_stylesheet();
+        $themes     = array(
+            $stylesheet => Gutenberg::getRootPath()
         );
+
         $template_files = array();
         foreach (apply_filters('jankx/gutenberg/directories', $themes) as $theme_slug => $theme_dir) {
             $template_base_paths  = get_block_theme_folders($theme_slug);
@@ -165,23 +167,23 @@ trait CustomWordPressStructure
         return $template;
     }
 
-    protected function checkTemplatesIsExistsInTheme($templates)
+    protected function checkTemplatesIsExistsInTheme($templates, $directoryName = 'templates')
     {
-        $pre = apply_filters('jankx/gutenberg/precheck-templates', null);
+        $pre = apply_filters('jankx/gutenberg/precheck-templates', null, $directoryName, $templates);
         if (!is_null($pre)) {
             return $pre;
         }
 
         $templateFiles = [];
-        $templateFiles = array_map(function ($template) {
+        $templateFiles = array_map(function ($template) use ($directoryName) {
             $files = [
-                get_stylesheet_directory() . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . $template . '.html',
-                get_stylesheet_directory() . DIRECTORY_SEPARATOR . 'block-templates' . DIRECTORY_SEPARATOR . $template . '.html'
+                get_stylesheet_directory() . DIRECTORY_SEPARATOR . $directoryName . DIRECTORY_SEPARATOR . $template . '.html',
+                get_stylesheet_directory() . DIRECTORY_SEPARATOR . 'block-' . $directoryName . DIRECTORY_SEPARATOR . $template . '.html'
             ];
 
             if (is_child_theme()) {
-                get_template_directory() . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . $template . '.html';
-                get_template_directory() . DIRECTORY_SEPARATOR . 'block-templates' . DIRECTORY_SEPARATOR . $template . '.html';
+                get_template_directory() . DIRECTORY_SEPARATOR . $directoryName . DIRECTORY_SEPARATOR . $template . '.html';
+                get_template_directory() . DIRECTORY_SEPARATOR . 'block-' . $directoryName . DIRECTORY_SEPARATOR . $template . '.html';
             }
             return $files;
         }, $templates);
@@ -306,5 +308,102 @@ trait CustomWordPressStructure
          */
 
         return apply_filters('get_block_templates', $query_result, $query, $template_type);
+    }
+
+    /**
+     * Retrieves the template file from the theme for a given slug.
+     *
+     * @since 5.9.0
+     * @access private
+     *
+     * @param string $template_type Template type. Either 'wp_template' or 'wp_template_part'.
+     * @param string $slug          Template slug.
+     * @return array|null {
+     *    Array with template metadata if $template_type is one of 'wp_template' or 'wp_template_part',
+     *    null otherwise.
+     *
+     *    @type string   $slug      Template slug.
+     *    @type string   $path      Template file path.
+     *    @type string   $theme     Theme slug.
+     *    @type string   $type      Template type.
+     *    @type string   $area      Template area. Only for 'wp_template_part'.
+     *    @type string   $title     Optional. Template title.
+     *    @type string[] $postTypes Optional. List of post types that the template supports. Only for 'wp_template'.
+     * }
+     */
+    protected static function get_block_template_file($template_type, $slug)
+    {
+        if ('wp_template' !== $template_type && 'wp_template_part' !== $template_type) {
+            return null;
+        }
+
+        $stylesheet = get_stylesheet();
+        $themes     = array(
+            $stylesheet => Gutenberg::getRootPath()
+        );
+        foreach ($themes as $theme_slug => $theme_dir) {
+            $file_path           = $theme_dir . DIRECTORY_SEPARATOR . 'parts' . DIRECTORY_SEPARATOR . $slug . '.html';
+
+            if (file_exists($file_path)) {
+                $new_template_item = array(
+                'slug'  => $slug,
+                'path'  => $file_path,
+                'theme' => $theme_slug,
+                'type'  => $template_type,
+                );
+
+
+                if ('wp_template_part' === $template_type) {
+                    return _add_block_template_part_area_info($new_template_item);
+                }
+
+                if ('wp_template' === $template_type) {
+                    return _add_block_template_info($new_template_item);
+                }
+
+                return $new_template_item;
+            }
+        }
+
+        return null;
+    }
+
+    public function get_block_file_template($block_template, $id, $template_type)
+    {
+        $template = substr($id, strpos($id, '//') + 2);
+        $templates = [$template];
+        if ($this->checkTemplatesIsExistsInTheme($templates, 'parts')) {
+            return $block_template;
+        }
+
+        $parts = explode('//', $id, 2);
+        if (count($parts) < 2) {
+            /** This filter is documented in wp-includes/block-template-utils.php */
+            return apply_filters('get_block_file_template', null, $id, $template_type);
+        }
+        list( $theme, $slug ) = $parts;
+
+        if (get_stylesheet() !== $theme) {
+            /** This filter is documented in wp-includes/block-template-utils.php */
+            return apply_filters('get_block_file_template', null, $id, $template_type);
+        }
+
+        $template_file = static::get_block_template_file($template_type, $slug);
+        if (null === $template_file) {
+            return $block_template;
+        }
+
+        $block_template = _build_block_template_result_from_file($template_file, $template_type);
+
+        /**
+         * Filters the block template object after it has been (potentially) fetched from the theme file.
+         *
+         * @since 5.9.0
+         *
+         * @param WP_Block_Template|null $block_template The found block template, or null if there is none.
+         * @param string                 $id             Template unique identifier (example: 'theme_slug//template_slug').
+         * @param string                 $template_type  Template type. Either 'wp_template' or 'wp_template_part'.
+         */
+        return apply_filters('get_block_file_template', $block_template, $id, $template_type);
     }
 }
