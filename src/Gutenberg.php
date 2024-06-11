@@ -55,13 +55,5 @@ class Gutenberg
 
     public function registerScripts()
     {
-        add_action('enqueue_block_editor_assets', function () {
-            wp_enqueue_script(
-                'my-custom-block',
-                jankx_get_path_url(dirname(JANKX_GUTENBERG_BOOT_FILE)) . '/build/index.js',
-                array( 'wp-blocks', 'wp-element', 'wp-editor' ),
-                static::VERSION
-            );
-        });
     }
 }

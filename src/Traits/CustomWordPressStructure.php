@@ -2,6 +2,7 @@
 
 namespace Jankx\Gutenberg\Traits;
 
+use Jankx;
 use Jankx\Gutenberg\Gutenberg;
 use Jankx\TemplateAndLayout;
 use WP_Block_Template;
@@ -40,9 +41,8 @@ trait CustomWordPressStructure
         $area             = isset($query['area']) ? $query['area'] : null;
         $post_type        = isset($query['post_type']) ? $query['post_type'] : '';
 
-        $stylesheet = get_stylesheet();
-        $themes     = array(
-            $stylesheet => Gutenberg::getRootPath()
+        $themes = array(
+            Jankx::ENGINE_ID => Gutenberg::getRootPath()
         );
         $template_files = array();
         foreach (apply_filters('jankx/gutenberg/directories', $themes) as $theme_slug => $theme_dir) {
