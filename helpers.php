@@ -1,14 +1,5 @@
 <?php
 
-
-function jankx_is_support_block_template()
-{
-    return apply_filters(
-        'jankx/gutenberg/enabled',
-        get_theme_support('block-templates')
-    );
-}
-
 function jankx_generate_gutenberg_templates($fileName) {
     return [dirname(JANKX_GUTENBERG_BOOT_FILE) . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR  .'page.html'];
 }
