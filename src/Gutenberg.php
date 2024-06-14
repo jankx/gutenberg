@@ -30,6 +30,8 @@ class Gutenberg
 
     protected function init()
     {
+        // Reset all filter hook for get_block_templates
+        remove_all_filters('get_block_templates');
     }
 
     public static function getRootPath()

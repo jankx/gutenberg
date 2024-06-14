@@ -211,6 +211,10 @@ trait CustomWordPressStructure
             return $block_template;
         }
 
+        if (defined('JANKX_DEBUG_BLOCKS') && constant('JANKX_DEBUG_BLOCKS') === true) {
+            error_log(sprintf('Looking template files for Jankx Gutenberg: [%s]', join(", ", $templates)));
+        }
+
         $post_type     = isset($query['post_type']) ? $query['post_type'] : '';
         $wp_query_args = array(
             'post_status'         => array( 'auto-draft', 'draft', 'publish' ),
