@@ -43,6 +43,16 @@ class Gutenberg
     {
         add_filter('pre_get_block_templates', [$this, 'changeTemplatesPaths'], 9999, 3);
         add_filter('pre_get_block_file_template', [$this, 'get_block_file_template'], 9999, 3);
+
+        // disable Jankx based CSS
+        /**
+         * @param \Jankx\Template\Page $page
+         */
+        add_action('jankx/template/render/start', function($page) {
+            if ($page->isGutenbergSupport()) {
+                add_filter('jankx/layout/based/common-css', '__return_false');
+            }
+        });
     }
 
     /**
@@ -50,6 +60,7 @@ class Gutenberg
      */
     public function setup()
     {
+
     }
 
     public function registerBlocks()
