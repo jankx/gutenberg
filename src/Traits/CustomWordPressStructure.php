@@ -2,7 +2,6 @@
 
 namespace Jankx\Gutenberg\Traits;
 
-use Jankx;
 use Jankx\Gutenberg\Gutenberg;
 use Jankx\TemplateAndLayout;
 use WP_Block_Template;
