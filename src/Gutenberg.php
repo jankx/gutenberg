@@ -49,11 +49,33 @@ class Gutenberg
         /**
          * @param \Jankx\Template\Page $page
          */
-        add_action('jankx/template/render/start', function($page) {
+        add_action('jankx/template/render/start', function ($page) {
             if ($page->isGutenbergSupport() && ($page->getLoadedLayout() === SiteLayout::LAYOUT_FULL_WIDTH)) {
                 add_filter('jankx/layout/based/common-css', '__return_false');
             }
+
+            add_action('jankx_component_before_header_content', [$this, 'openWrapper']);
+            add_action('jankx_component_after_header_content', [$this, 'closeWrapper']);
+
+            add_action('jankx/template/footer/before_content', [$this, 'openWrapper']);
+            add_action('jankx/template/footer/after_content', [$this, 'closeWrapper']);
+
+            add_filter('jankx_template_footer_widget_wrapper_class', function ($classes) {
+                $classes[] = 'jankx-base';
+
+                return $classes;
+            });
         });
+    }
+
+    public function openWrapper()
+    {
+        printf('<div %s>', jankx_generate_html_attributes(['class' => 'jankx-base']));
+    }
+
+    public function closeWrapper()
+    {
+        echo '</div>';
     }
 
     /**
@@ -61,7 +83,6 @@ class Gutenberg
      */
     public function setup()
     {
-
     }
 
     public function registerBlocks()
