@@ -19,7 +19,7 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "jankx/core": "*",
+       "jankx/site-layout": "*",
         "jankx/widget": "*",
         "jankx/helpers": "^1.0"
     }

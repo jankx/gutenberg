@@ -3,6 +3,7 @@
 namespace Jankx\Gutenberg;
 
 use Jankx\Gutenberg\Traits\CustomWordPressStructure;
+use Jankx\SiteLayout\SiteLayout;
 
 class Gutenberg
 {
@@ -49,7 +50,7 @@ class Gutenberg
          * @param \Jankx\Template\Page $page
          */
         add_action('jankx/template/render/start', function($page) {
-            if ($page->isGutenbergSupport()) {
+            if ($page->isGutenbergSupport() && ($page->getLoadedLayout() === SiteLayout::LAYOUT_FULL_WIDTH)) {
                 add_filter('jankx/layout/based/common-css', '__return_false');
             }
         });
