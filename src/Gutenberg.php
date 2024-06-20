@@ -40,9 +40,9 @@ class Gutenberg
         return dirname(JANKX_GUTENBERG_BOOT_FILE);
     }
 
-    public function createCoreGroupWrapper($parsed_block)
+    public function createCoreGroupWrapper($parsed_block, $parent_block)
     {
-        if ($parsed_block['blockName'] === 'core/group') {
+        if ($parsed_block['blockName'] === 'core/group' && $parent_block == $parsed_block) {
             ob_start();
             jankx_open_container();
             $container = ob_get_clean();
@@ -86,11 +86,11 @@ class Gutenberg
                 });
 
                 add_action('jankx/template/page/content/before', function () {
-                    add_filter('render_block_data', [$this, 'createCoreGroupWrapper']);
+                    add_filter('render_block_data', [$this, 'createCoreGroupWrapper'], 10, 2);
                 });
 
                 add_action('jankx/template/page/content/after', function () {
-                    remove_filter('render_block_data', [$this, 'createCoreGroupWrapper']);
+                    remove_filter('render_block_data', [$this, 'createCoreGroupWrapper'], 10);
                 });
             }
         });
