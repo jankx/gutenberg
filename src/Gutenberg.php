@@ -150,6 +150,23 @@ class Gutenberg
         }
     }
 
+    protected function registerJsonBlocks()
+    {
+        $jankx = Jankx::getInstance();
+        $blocks = [];
+        foreach ($this->blocks as $blockClass) {
+            /**
+             * @var \Jankx\Interfaces\BlockInterface
+             */
+            $block = $jankx->get($blockClass);
+            if (!is_a($block, BlockInterface::class)) {
+                continue;
+            }
+            $blocks[$block->getType()] = $block->getBlockJson();
+        }
+        return $blocks;
+    }
+
     public function registerScripts()
     {
         wp_register_script(
@@ -158,9 +175,12 @@ class Gutenberg
             ['react',  'react-dom', 'wp-block-editor', 'wp-blocks', 'wp-i18n'],
             array_get($this->packageInfo, 'version')
         );
+
+        wp_localize_script('jankx-gutenberg', 'jankx_blocks', $this->registerJsonBlocks());
     }
 
-    public function enqueueScripts() {
+    public function enqueueScripts()
+    {
         wp_enqueue_script('jankx-gutenberg');
     }
 }
