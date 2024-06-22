@@ -9,15 +9,13 @@ const isProduction = process.env.NODE_ENV == 'production';
 
 const stylesHandler = MiniCssExtractPlugin.loader;
 
-
-
 const config = {
     entry: {
-        'post-layout': './blocks/post-layout/index.js',
+        'jankx-gutenberg': './blocks/index.js',
     },
     output: {
         path: path.resolve(__dirname, 'build'),
-        filename: '[name]/[name].js'
+        filename: '[name].js'
     },
     plugins: [
         new MiniCssExtractPlugin(),
@@ -62,7 +60,7 @@ const config = {
     externals: {
         '@wordpress/blocks': 'wp.blocks',
         '@wordpress/block-editor': 'wp.blockEditor',
-        'react': 'react',
+        'react': 'React',
         'react-dom': 'react-dom'
     }
 };

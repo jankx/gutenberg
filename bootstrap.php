@@ -24,6 +24,8 @@ class Jankx_Gutenberg_Bootstraper {
         $gutenberg->boot();
 
         add_action('after_setup_theme', [$gutenberg, 'setup']);
+
+        Jankx::getInstance()->instance('GUTENBERG_ROOT', dirname(JANKX_GUTENBERG_BOOT_FILE));
     }
 }
 

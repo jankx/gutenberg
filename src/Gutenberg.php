@@ -2,7 +2,10 @@
 
 namespace Jankx\Gutenberg;
 
+use Jankx;
+use Jankx\Gutenberg\Blocks\PostLayoutBlock;
 use Jankx\Gutenberg\Traits\CustomWordPressStructure;
+use Jankx\Interfaces\BlockInterface;
 use Jankx\SiteLayout\SiteLayout;
 
 class Gutenberg
@@ -13,10 +16,13 @@ class Gutenberg
 
     protected static $instance;
 
+    protected $packageInfo = [];
+
+    protected $blocks = [];
+
     protected function __construct()
     {
         $this->init();
-        $this->registerScripts();
     }
 
     public static function getInstance()
@@ -29,6 +35,10 @@ class Gutenberg
 
     protected function init()
     {
+        $this->packageInfo = json_decode(
+            file_get_contents(dirname(JANKX_GUTENBERG_BOOT_FILE) . DIRECTORY_SEPARATOR . 'composer.json'),
+            true
+        );
         // Reset all filter hook for get_block_templates
         remove_all_filters('get_block_templates');
 
@@ -111,13 +121,46 @@ class Gutenberg
      */
     public function setup()
     {
+        $this->blocks = apply_filters(
+            'jankx/gutenberg/blocks',
+            [
+                PostLayoutBlock::class,
+            ]
+        );
+        add_action('admin_enqueue_scripts', [$this, 'registerScripts']);
+        add_action('admin_enqueue_scripts', [$this, 'enqueueScripts'], 20);
     }
 
     public function registerBlocks()
     {
+        $jankx = Jankx::getInstance();
+        foreach ($this->blocks as $blockClass) {
+            if (!class_exists($blockClass, true) && is_a($blockClass, BlockInterface::class, true)) {
+                continue;
+            }
+            /**
+             * @var \Jankx\Interfaces\BlockInterface
+             */
+            $block = new $blockClass();
+            $block->setBlockBaseDirectory($jankx->get('GUTENBERG_ROOT') . DIRECTORY_SEPARATOR . 'build');
+            $jankx->instance($blockClass, $block);
+
+            // Register Jankx Blocks
+            $block->register();
+        }
     }
 
     public function registerScripts()
     {
+        wp_register_script(
+            'jankx-gutenberg',
+            jankx_get_path_url(Gutenberg::getRootPath()) . '/build/jankx-gutenberg.js',
+            ['react',  'react-dom', 'wp-block-editor', 'wp-blocks', 'wp-i18n'],
+            array_get($this->packageInfo, 'version')
+        );
+    }
+
+    public function enqueueScripts() {
+        wp_enqueue_script('jankx-gutenberg');
     }
 }
