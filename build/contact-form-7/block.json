@@ -1,12 +1,12 @@
+
 {
     "$schema": "https://schemas.wp.org/trunk/block.json",
     "apiVersion": 3,
-    "name": "jankx/posts",
-    "version": "0.1.0",
-    "title": "Jankx Posts",
+    "name": "jankx/contact-form-7",
+    "version": "1.0.0",
+    "title": "Contact Form 7",
     "category": "jankx",
-    "icon": "cover-image",
-    "description": "WordPress post and custom post type layout",
+    "icon": "email",
     "supports": {
       "html": false
     },

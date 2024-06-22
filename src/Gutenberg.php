@@ -3,7 +3,12 @@
 namespace Jankx\Gutenberg;
 
 use Jankx;
+use Jankx\Gutenberg\Blocks\ContactForm7Block;
+use Jankx\Gutenberg\Blocks\LinkTabsBlock;
+use Jankx\Gutenberg\Blocks\PageSelectorBlock;
 use Jankx\Gutenberg\Blocks\PostsBlock;
+use Jankx\Gutenberg\Blocks\PostsTabsBlock;
+use Jankx\Gutenberg\Blocks\SocialSharingBlock;
 use Jankx\Gutenberg\Traits\CustomWordPressStructure;
 use Jankx\Interfaces\BlockInterface;
 use Jankx\SiteLayout\SiteLayout;
@@ -125,6 +130,11 @@ class Gutenberg
             'jankx/gutenberg/blocks',
             [
                 PostsBlock::class,
+                ContactForm7Block::class,
+                LinkTabsBlock::class,
+                PageSelectorBlock::class,
+                PostsTabsBlock::class,
+                SocialSharingBlock::class
             ]
         );
         add_action('admin_enqueue_scripts', [$this, 'registerScripts']);

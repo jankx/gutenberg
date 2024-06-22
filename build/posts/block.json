@@ -5,7 +5,7 @@
     "version": "0.1.0",
     "title": "Jankx Posts",
     "category": "jankx",
-    "icon": "smiley",
+    "icon": "cover-image",
     "description": "WordPress post and custom post type layout",
     "supports": {
       "html": false

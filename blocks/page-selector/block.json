@@ -1,12 +1,11 @@
 {
     "$schema": "https://schemas.wp.org/trunk/block.json",
     "apiVersion": 3,
-    "name": "jankx/posts",
+    "name": "jankx/page-selector",
     "version": "0.1.0",
-    "title": "Jankx Posts",
+    "title": "Page Selector",
     "category": "jankx",
-    "icon": "cover-image",
-    "description": "WordPress post and custom post type layout",
+    "icon": "admin-page",
     "supports": {
       "html": false
     },

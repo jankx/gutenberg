@@ -1,12 +1,11 @@
 {
     "$schema": "https://schemas.wp.org/trunk/block.json",
     "apiVersion": 3,
-    "name": "jankx/posts",
+    "name": "jankx/link-tabs",
     "version": "0.1.0",
-    "title": "Jankx Posts",
+    "title": "Link Tabs",
     "category": "jankx",
-    "icon": "cover-image",
-    "description": "WordPress post and custom post type layout",
+    "icon": "smiley",
     "supports": {
       "html": false
     },

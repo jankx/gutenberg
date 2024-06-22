@@ -1,12 +1,11 @@
 {
     "$schema": "https://schemas.wp.org/trunk/block.json",
     "apiVersion": 3,
-    "name": "jankx/posts",
+    "name": "jankx/social-sharing",
     "version": "0.1.0",
-    "title": "Jankx Posts",
+    "title": "Social Sharing",
     "category": "jankx",
-    "icon": "cover-image",
-    "description": "WordPress post and custom post type layout",
+    "icon": "share",
     "supports": {
       "html": false
     },
