@@ -1,9 +1,9 @@
 {
     "$schema": "https://schemas.wp.org/trunk/block.json",
     "apiVersion": 3,
-    "name": "jankx/post-layout",
+    "name": "jankx/posts",
     "version": "0.1.0",
-    "title": "Post Layout",
+    "title": "Jankx Posts",
     "category": "jankx",
     "icon": "smiley",
     "description": "WordPress post and custom post type layout",

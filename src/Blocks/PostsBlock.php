@@ -4,9 +4,9 @@ namespace Jankx\Gutenberg\Blocks;
 
 use Jankx\Blocks\BlockAbstract;
 
-class PostLayoutBlock extends BlockAbstract
+class PostsBlock extends BlockAbstract
 {
-    protected $type = 'jankx/post-layout';
+    protected $type = 'jankx/posts';
 
     public function render()
     {

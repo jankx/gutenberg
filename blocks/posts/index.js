@@ -1,7 +1,7 @@
 import * as React from "react";
 
 export default {
-    getType: () => 'jankx/post-layout',
+    getType: () => 'jankx/posts',
     edit: ( { className, setAttributes, attributes } ) => {
         const { name } = attributes;
         return (

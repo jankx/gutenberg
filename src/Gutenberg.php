@@ -3,7 +3,7 @@
 namespace Jankx\Gutenberg;
 
 use Jankx;
-use Jankx\Gutenberg\Blocks\PostLayoutBlock;
+use Jankx\Gutenberg\Blocks\PostsBlock;
 use Jankx\Gutenberg\Traits\CustomWordPressStructure;
 use Jankx\Interfaces\BlockInterface;
 use Jankx\SiteLayout\SiteLayout;
@@ -124,7 +124,7 @@ class Gutenberg
         $this->blocks = apply_filters(
             'jankx/gutenberg/blocks',
             [
-                PostLayoutBlock::class,
+                PostsBlock::class,
             ]
         );
         add_action('admin_enqueue_scripts', [$this, 'registerScripts']);

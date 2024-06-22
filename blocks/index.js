@@ -1,9 +1,9 @@
 import { registerBlockType } from "@wordpress/blocks";
 
-import PostLayout from "./post-layout";
+import posts from "./posts";
 
 const blockMethods = {
-  'jankx/post-layout': PostLayout,
+  'jankx/posts': posts,
 };
 
 const blocks = window["jankx_blocks"] || [];
