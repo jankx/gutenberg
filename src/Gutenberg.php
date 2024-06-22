@@ -16,8 +16,6 @@ class Gutenberg
     protected function __construct()
     {
         $this->init();
-
-        $this->registerBlocks();
         $this->registerScripts();
     }
 
@@ -33,6 +31,8 @@ class Gutenberg
     {
         // Reset all filter hook for get_block_templates
         remove_all_filters('get_block_templates');
+
+        add_action('init', [$this, 'registerBlocks']);
     }
 
     public static function getRootPath()
