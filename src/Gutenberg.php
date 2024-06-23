@@ -139,6 +139,7 @@ class Gutenberg
         );
         add_action('admin_enqueue_scripts', [$this, 'registerScripts']);
         add_action('admin_enqueue_scripts', [$this, 'enqueueScripts'], 20);
+        add_filter('block_categories_all', [$this, 'registerCategory']);
     }
 
     public function registerBlocks()
@@ -192,5 +193,17 @@ class Gutenberg
     public function enqueueScripts()
     {
         wp_enqueue_script('jankx-gutenberg');
+    }
+
+    public function registerCategory($categories)
+    {
+        $categories[] = array(
+            'slug' => 'jankx',
+            'title' => apply_filters(
+                'jankx/gutenberg/category/name',
+                Jankx::FRAMEWORK_NAME
+            )
+        );
+        return $categories;
     }
 }

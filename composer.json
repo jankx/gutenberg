@@ -3,6 +3,7 @@
     "description": "The Block Editor extension for WordPress and beyond",
     "type": "library",
     "license": "MIT",
+    "version": "1.0.0.0",
     "autoload": {
         "psr-4": {
             "Jankx\\Gutenberg\\": "src/"
