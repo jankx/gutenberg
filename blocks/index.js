@@ -6,6 +6,7 @@ import linkTabs from "./link-tabs";
 import postsTabs from "./posts-tabs";
 import contactForm7 from "./contact-form-7";
 import socialSharing from "./social-sharing";
+import products from "./products";
 
 const blockMethods = {
   'jankx/posts': posts,
@@ -14,6 +15,7 @@ const blockMethods = {
   'jankx/posts-tabs': postsTabs,
   'jankx/contact-form-7': contactForm7,
   'jankx/social-sharing': socialSharing,
+  'jankx/products': products,
 };
 
 const blocks = window["jankx_blocks"] || [];

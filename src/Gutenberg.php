@@ -8,6 +8,7 @@ use Jankx\Gutenberg\Blocks\LinkTabsBlock;
 use Jankx\Gutenberg\Blocks\PageSelectorBlock;
 use Jankx\Gutenberg\Blocks\PostsBlock;
 use Jankx\Gutenberg\Blocks\PostsTabsBlock;
+use Jankx\Gutenberg\Blocks\ProductsBlock;
 use Jankx\Gutenberg\Blocks\SocialSharingBlock;
 use Jankx\Gutenberg\Traits\CustomWordPressStructure;
 use Jankx\Interfaces\BlockInterface;
@@ -134,7 +135,8 @@ class Gutenberg
                 LinkTabsBlock::class,
                 PageSelectorBlock::class,
                 PostsTabsBlock::class,
-                SocialSharingBlock::class
+                SocialSharingBlock::class,
+                ProductsBlock::class
             ]
         );
         add_action('admin_enqueue_scripts', [$this, 'registerScripts']);

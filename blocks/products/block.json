@@ -1,12 +1,11 @@
 {
     "$schema": "https://schemas.wp.org/trunk/block.json",
     "apiVersion": 3,
-    "name": "jankx/posts",
+    "name": "jankx/products",
     "version": "1.0.0",
-    "title": "Jankx Posts",
+    "title": "Products",
     "category": "jankx",
-    "icon": "cover-image",
-    "description": "WordPress post and custom post type layout",
+    "icon": "products",
     "supports": {
       "html": false
     },
