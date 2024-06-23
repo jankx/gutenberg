@@ -30,6 +30,5 @@ Object.keys(blocks).forEach((blockType) => {
       blockAttributes = blockMethod.customizeAttributes(blockAttributes);
     }
   }
-  console.log(blockType, blockAttributes);
   registerBlockType(blockType, blockAttributes);
 });
