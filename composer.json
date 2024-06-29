@@ -22,6 +22,7 @@
     "require": {
        "jankx/site-layout": "*",
         "jankx/widget": "*",
-        "jankx/helpers": "^1.0"
+        "jankx/helpers": "^1.0",
+        "jankx/gutenberg-blocks": "*"
     }
 }
