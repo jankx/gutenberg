@@ -3,6 +3,7 @@
 namespace Jankx\Gutenberg;
 
 use Jankx;
+use Jankx\Blocks\BlockInterface;
 use Jankx\Gutenberg\Blocks\ContactForm7Block;
 use Jankx\Gutenberg\Blocks\LinkTabsBlock;
 use Jankx\Gutenberg\Blocks\PageSelectorBlock;
@@ -11,7 +12,6 @@ use Jankx\Gutenberg\Blocks\PostsTabsBlock;
 use Jankx\Gutenberg\Blocks\ProductsBlock;
 use Jankx\Gutenberg\Blocks\SocialSharingBlock;
 use Jankx\Gutenberg\Traits\CustomWordPressStructure;
-use Jankx\Interfaces\BlockInterface;
 use Jankx\SiteLayout\SiteLayout;
 
 class Gutenberg
@@ -152,7 +152,7 @@ class Gutenberg
                 continue;
             }
             /**
-             * @var \Jankx\Interfaces\BlockInterface
+             * @var \Jankx\Blocks\BlockInterface
              */
             $block = new $blockClass();
             $block->setBlockBaseDirectory($jankx->get('GUTENBERG_ROOT') . DIRECTORY_SEPARATOR . 'build');
@@ -169,7 +169,7 @@ class Gutenberg
         $blocks = [];
         foreach ($this->blocks as $blockClass) {
             /**
-             * @var \Jankx\Interfaces\BlockInterface
+             * @var \Jankx\Blocks\BlockInterface
              */
             $block = $jankx->get($blockClass);
             if (!is_a($block, BlockInterface::class)) {
