@@ -36,7 +36,6 @@ class ProductsBlock extends BlockAbstract
             'columns' => $this->get_responsive_setting('columns', 4),
             'rows' => $this->get_responsive_setting('rows', 1),
             'thumbnail_size'  => array_get($settings, 'thumbnail_size', 'medium'),
-            'wrap_tag_name' => 'ul',
         ));
 
         // Set Woocommerce loop columns
@@ -48,6 +47,6 @@ class ProductsBlock extends BlockAbstract
         if ($widgetTitle && $productsContent) {
             $productsContent .= sprintf('<h3 class="products-widget-title"><span>%s</span></h3>', $widgetTitle);
         }
-        return $productsContent . $productsModule->render(false);
+        return $productsContent . $productsModule->render();
     }
 }
