@@ -66,7 +66,7 @@ class Gutenberg
          * @param \Jankx\Template\Page $page
          */
         add_action('jankx/template/render/start', function ($page) {
-            if ($page->isGutenbergSupport() && (in_array($page->getLoadedLayout(), [SiteLayout::LAYOUT_FULL_WIDTH]))) {
+            if ($page->isGutenbergSupport()) {
                 add_filter('jankx/layout/based/common-css', '__return_false');
             }
         });
