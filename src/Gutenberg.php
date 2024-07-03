@@ -68,6 +68,11 @@ class Gutenberg
         add_action('jankx/template/render/start', function ($page) {
             if ($page->isGutenbergSupport()) {
                 add_filter('jankx/layout/based/common-css', '__return_false');
+                add_filter('jankx/layout/main_content/classes', function($classes){
+                    array_push($classes, 'list-none-style');
+
+                    return $classes;
+                });
             }
         });
     }
