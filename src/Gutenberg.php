@@ -14,7 +14,9 @@ use Jankx\Gutenberg\Blocks\SocialSharingBlock;
 use Jankx\Gutenberg\Blocks\Templates\ContainerBlock;
 use Jankx\Gutenberg\Blocks\Templates\FooterWrapBlock;
 use Jankx\Gutenberg\Blocks\Templates\HeaderWrapBlock;
+use Jankx\Gutenberg\Blocks\Templates\SiteFooterBlock;
 use Jankx\Gutenberg\Blocks\Templates\SiteFooterContentBlock;
+use Jankx\Gutenberg\Blocks\Templates\SiteHeaderBlock;
 use Jankx\Gutenberg\Blocks\Templates\SiteHeaderContentBlock;
 use Jankx\Gutenberg\Traits\CustomWordPressStructure;
 
@@ -109,10 +111,12 @@ class Gutenberg
 
 
                 // template blocks
+                SiteHeaderBlock::class,
                 HeaderWrapBlock::class,
                 ContainerBlock::class,
                 SiteHeaderContentBlock::class,
 
+                SiteFooterBlock::class,
                 FooterWrapBlock::class,
                 SiteFooterContentBlock::class,
             ]
@@ -120,6 +124,13 @@ class Gutenberg
         add_action('admin_enqueue_scripts', [$this, 'registerScripts']);
         add_action('admin_enqueue_scripts', [$this, 'enqueueScripts'], 20);
         add_filter('block_categories_all', [$this, 'registerCategory']);
+        add_filter('render_block_core/template-part', function ($content, $parsed_block) {
+            if (strpos($content, '<div class="wp-block-template-part">') !== false) {
+                $content = str_replace('<div class="wp-block-template-part">', '', $content);
+                $content = substr($content, 0, -6);
+            }
+            return $content;
+        }, 10, 2);
     }
 
     public function registerBlocks()
