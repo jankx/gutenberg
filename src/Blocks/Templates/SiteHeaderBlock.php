@@ -4,9 +4,18 @@ namespace Jankx\Gutenberg\Blocks\Templates;
 
 use Jankx\Blocks\BlockAbstract;
 
-class HeaderBlock extends BlockAbstract
+class SiteHeaderBlock extends BlockAbstract
 {
-    protected $type = 'jankx/header';
+    protected $type = 'jankx/site-header';
+
+    public function getBlockJson(): array
+    {
+        return [
+            'render_callback' => [$this, 'render'],
+            'attributes' => [
+            ]
+        ];
+    }
 
     public function render($data, $content)
     {
@@ -31,7 +40,7 @@ class HeaderBlock extends BlockAbstract
             do_action('jankx_component_after_header');
             $after = ob_get_clean();
 
-            return $before . array_get($data, 'content') . $after;
+            return $before . array_get($data, 'content') . $content . $after;
         }
     }
 }
