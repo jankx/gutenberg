@@ -14,6 +14,7 @@ use Jankx\Gutenberg\Blocks\SocialSharingBlock;
 use Jankx\Gutenberg\Blocks\Templates\ContainerBlock;
 use Jankx\Gutenberg\Blocks\Templates\FooterWrapBlock;
 use Jankx\Gutenberg\Blocks\Templates\HeaderWrapBlock;
+use Jankx\Gutenberg\Blocks\Templates\MainContentWrapBlock;
 use Jankx\Gutenberg\Blocks\Templates\SiteFooterBlock;
 use Jankx\Gutenberg\Blocks\Templates\SiteFooterContentBlock;
 use Jankx\Gutenberg\Blocks\Templates\SiteHeaderBlock;
@@ -115,7 +116,7 @@ class Gutenberg
                 HeaderWrapBlock::class,
                 ContainerBlock::class,
                 SiteHeaderContentBlock::class,
-
+                MainContentWrapBlock::class,
                 SiteFooterBlock::class,
                 FooterWrapBlock::class,
                 SiteFooterContentBlock::class,
