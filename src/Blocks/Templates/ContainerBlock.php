@@ -20,8 +20,14 @@ class ContainerBlock extends BlockAbstract
 
     public function render($data, $content)
     {
-        return jankx_open_container('c-header-container', 'jankx_component_header_container', false)
-            . $content
-            . jankx_close_container('c-header-container', 'jankx_component_header_container', false);
+        ob_start();
+        jankx_open_container('c-header-container', 'jankx_component_header_container', false);
+        $start = ob_get_clean();
+
+        ob_start();
+        jankx_close_container('c-header-container', 'jankx_component_header_container', false);
+        $end = ob_get_clean();
+
+        return $start . $content . $end;
     }
 }
