@@ -10,7 +10,7 @@ class PostsBlock extends BlockAbstract
 {
     protected $type = 'jankx/posts';
 
-    public function render()
+    public function render($data, $content)
     {
         $output = '';
 

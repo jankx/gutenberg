@@ -16,7 +16,7 @@ class ProductsBlock extends BlockAbstract
         return class_exists(WooCommerce::class) && defined('JANKX_ECOMMERCE_FILE_LOADER');
     }
 
-    public function render()
+    public function render($data, $content)
     {
         $settings = [];
         $productsModule = new ProductsRenderer(array(

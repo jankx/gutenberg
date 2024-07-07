@@ -8,7 +8,7 @@ class SocialSharingBlock extends BlockAbstract
 {
     protected $type = 'jankx/social-sharing';
 
-    public function render()
+    public function render($data, $content)
     {
     }
 }

@@ -8,7 +8,7 @@ class ContactForm7Block extends BlockAbstract
 {
     protected $type = 'jankx/contact-form-7';
 
-    public function render()
+    public function render($data, $content)
     {
     }
 }

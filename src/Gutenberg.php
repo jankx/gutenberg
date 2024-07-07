@@ -11,6 +11,9 @@ use Jankx\Gutenberg\Blocks\PostsBlock;
 use Jankx\Gutenberg\Blocks\PostsTabsBlock;
 use Jankx\Gutenberg\Blocks\ProductsBlock;
 use Jankx\Gutenberg\Blocks\SocialSharingBlock;
+use Jankx\Gutenberg\Blocks\Templates\ContainerBlock;
+use Jankx\Gutenberg\Blocks\Templates\HeaderBlock;
+use Jankx\Gutenberg\Blocks\Templates\HeaderWrapBlock;
 use Jankx\Gutenberg\Traits\CustomWordPressStructure;
 use Jankx\SiteLayout\SiteLayout;
 
@@ -68,7 +71,7 @@ class Gutenberg
         add_action('jankx/template/render/start', function ($page) {
             if ($page->isGutenbergSupport()) {
                 add_filter('jankx/layout/based/common-css', '__return_false');
-                add_filter('jankx/layout/main_content/classes', function($classes){
+                add_filter('jankx/layout/main_content/classes', function ($classes) {
                     array_push($classes, 'list-none-style');
 
                     return $classes;
@@ -101,7 +104,13 @@ class Gutenberg
                 PageSelectorBlock::class,
                 PostsTabsBlock::class,
                 SocialSharingBlock::class,
-                ProductsBlock::class
+                ProductsBlock::class,
+
+
+                // template blocks
+                HeaderWrapBlock::class,
+                ContainerBlock::class,
+                HeaderBlock::class,
             ]
         );
         add_action('admin_enqueue_scripts', [$this, 'registerScripts']);

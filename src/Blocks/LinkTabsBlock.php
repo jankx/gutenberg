@@ -8,7 +8,7 @@ class LinkTabsBlock extends BlockAbstract
 {
     protected $type = 'jankx/link-tabs';
 
-    public function render()
+    public function render($data, $content)
     {
     }
 }

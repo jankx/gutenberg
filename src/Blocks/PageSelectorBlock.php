@@ -8,7 +8,7 @@ class PageSelectorBlock extends BlockAbstract
 {
     protected $type = 'jankx/page-selector';
 
-    public function render()
+    public function render($data, $content)
     {
     }
 }
