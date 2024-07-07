@@ -4,9 +4,9 @@ namespace Jankx\Gutenberg\Blocks\Templates;
 
 use Jankx\Blocks\BlockAbstract;
 
-class SiteFooterBlock extends BlockAbstract
+class SiteFooterContentBlock extends BlockAbstract
 {
-    protected $type = 'jankx/site-footer';
+    protected $type = 'jankx/footer-content';
 
     public function getBlockJson(): array
     {

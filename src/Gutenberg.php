@@ -14,8 +14,8 @@ use Jankx\Gutenberg\Blocks\SocialSharingBlock;
 use Jankx\Gutenberg\Blocks\Templates\ContainerBlock;
 use Jankx\Gutenberg\Blocks\Templates\FooterWrapBlock;
 use Jankx\Gutenberg\Blocks\Templates\HeaderWrapBlock;
-use Jankx\Gutenberg\Blocks\Templates\SiteFooterBlock;
-use Jankx\Gutenberg\Blocks\Templates\SiteHeaderBlock;
+use Jankx\Gutenberg\Blocks\Templates\SiteFooterContentBlock;
+use Jankx\Gutenberg\Blocks\Templates\SiteHeaderContentBlock;
 use Jankx\Gutenberg\Traits\CustomWordPressStructure;
 
 class Gutenberg
@@ -111,10 +111,10 @@ class Gutenberg
                 // template blocks
                 HeaderWrapBlock::class,
                 ContainerBlock::class,
-                SiteHeaderBlock::class,
+                SiteHeaderContentBlock::class,
 
                 FooterWrapBlock::class,
-                SiteFooterBlock::class,
+                SiteFooterContentBlock::class,
             ]
         );
         add_action('admin_enqueue_scripts', [$this, 'registerScripts']);

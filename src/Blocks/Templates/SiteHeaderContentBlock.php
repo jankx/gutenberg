@@ -4,9 +4,9 @@ namespace Jankx\Gutenberg\Blocks\Templates;
 
 use Jankx\Blocks\BlockAbstract;
 
-class SiteHeaderBlock extends BlockAbstract
+class SiteHeaderContentBlock extends BlockAbstract
 {
-    protected $type = 'jankx/site-header';
+    protected $type = 'jankx/header-content';
 
     public function getBlockJson(): array
     {
