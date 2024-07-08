@@ -4,6 +4,7 @@ namespace Jankx\Gutenberg;
 
 use Jankx;
 use Jankx\Blocks\BlockInterface;
+use Jankx\Blocks\GutenbergFilterInterface;
 use Jankx\Gutenberg\Blocks\ContactForm7Block;
 use Jankx\Gutenberg\Blocks\LinkTabsBlock;
 use Jankx\Gutenberg\Blocks\PageSelectorBlock;
@@ -19,6 +20,7 @@ use Jankx\Gutenberg\Blocks\Templates\SiteFooterBlock;
 use Jankx\Gutenberg\Blocks\Templates\SiteFooterContentBlock;
 use Jankx\Gutenberg\Blocks\Templates\SiteHeaderBlock;
 use Jankx\Gutenberg\Blocks\Templates\SiteHeaderContentBlock;
+use Jankx\Gutenberg\Filters\PostTitleFilter;
 use Jankx\Gutenberg\Traits\CustomWordPressStructure;
 
 class Gutenberg
@@ -32,6 +34,8 @@ class Gutenberg
     protected $packageInfo = [];
 
     protected $blocks = [];
+
+    protected $filters = [];
 
     protected function __construct()
     {
@@ -132,6 +136,8 @@ class Gutenberg
             }
             return $content;
         }, 10, 2);
+
+        add_action('init', [$this, 'initFilters']);
     }
 
     public function registerBlocks()
@@ -197,5 +203,23 @@ class Gutenberg
             )
         );
         return $categories;
+    }
+
+    public function initFilters()
+    {
+        $this->filters = apply_filters('jankx/gutenberg/content/filters', [
+            PostTitleFilter::class,
+        ]);
+
+        foreach ($this->filters as $filterCls) {
+            if (!is_a($filterCls, GutenbergFilterInterface::class, true)) {
+                continue;
+            }
+            /**
+             * @var \Jankx\Blocks\GutenbergFilterInterface
+             */
+            $filter = new $filterCls();
+            add_action("render_block_{$filter->getFilterTag()}", [$filter, 'apply'], 10, 3);
+        }
     }
 }
