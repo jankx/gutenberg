@@ -3,7 +3,7 @@
 namespace Jankx\Gutenberg\Blocks;
 
 use Jankx\Blocks\BlockAbstract;
-use Jankx\WooCommerce\Base\Renderer\ProductsRenderer;
+use Jankx\WooCommerce\Renderer\ProductsRenderer;
 use Jankx\PostLayout\Layout\Card;
 use WooCommerce;
 
