@@ -3,7 +3,7 @@
 namespace Jankx\Gutenberg\Blocks;
 
 use Jankx\Blocks\BlockAbstract;
-use Jankx\Ecommerce\Base\Renderer\ProductsRenderer;
+use Jankx\WooCommerce\Base\Renderer\ProductsRenderer;
 use Jankx\PostLayout\Layout\Card;
 use WooCommerce;
 
@@ -13,7 +13,7 @@ class ProductsBlock extends BlockAbstract
 
     public function isEnabled(): bool
     {
-        return class_exists(WooCommerce::class) && defined('JANKX_ECOMMERCE_FILE_LOADER');
+        return class_exists(WooCommerce::class) && defined('JANKX_WOOCOMMERCE_FILE_LOADER');
     }
 
     public function render($data, $content)
