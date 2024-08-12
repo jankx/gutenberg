@@ -18,6 +18,10 @@ class ProductsBlock extends BlockAbstract
 
     public function render($data, $content)
     {
+        // Check plugin before render
+        if (!function_exists('wc_get_loop_prop')) {
+            return 'WooCommerce plugin is not activated';
+        }
         $settings = [];
         $productsModule = new ProductsRenderer(array(
             'widget_title' => array_get($settings, 'title', 10),
