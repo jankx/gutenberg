@@ -49,7 +49,7 @@ class ProductsBlock extends BlockAbstract
         $productsContent = '';
         $widgetTitle = array_get($settings, 'title');
         if ($widgetTitle && $productsContent) {
-            $productsContent .= sprintf('<h3 class="products-widget-title"><span>%s</span></h3>', $widgetTitle);
+            $productsContent .= sprintf('<h2 class="products-widget-title"><span>%s</span></h2>', $widgetTitle);
         }
         return $productsContent . $productsModule->render();
     }
