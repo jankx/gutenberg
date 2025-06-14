@@ -2,6 +2,10 @@
 
 namespace Jankx\Gutenberg\Blocks;
 
+if (!defined('ABSPATH')) {
+    exit('Cheatin huh?');
+}
+
 use Jankx\Blocks\BlockAbstract;
 use Jankx\WooCommerce\Renderer\ProductsRenderer;
 use Jankx\PostLayout\Layout\Card;

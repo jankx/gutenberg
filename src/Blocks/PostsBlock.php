@@ -2,6 +2,10 @@
 
 namespace Jankx\Gutenberg\Blocks;
 
+if (!defined('ABSPATH')) {
+    exit('Cheatin huh?');
+}
+
 use Jankx\Blocks\BlockAbstract;
 use Jankx\PostLayout\Layout\Card;
 use Jankx\Widget\Renderers\PostsRenderer;

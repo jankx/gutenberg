@@ -2,6 +2,10 @@
 
 namespace Jankx\Gutenberg\Traits;
 
+if (!defined('ABSPATH')) {
+    exit('Cheatin huh?');
+}
+
 use Jankx\Gutenberg\Gutenberg;
 use Jankx\TemplateAndLayout;
 use WP_Block_Template;

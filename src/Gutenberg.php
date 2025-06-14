@@ -2,6 +2,10 @@
 
 namespace Jankx\Gutenberg;
 
+if (!defined('ABSPATH')) {
+    exit('Cheatin huh?');
+}
+
 use Jankx;
 use Jankx\Blocks\BlockInterface;
 use Jankx\Blocks\GutenbergFilterInterface;

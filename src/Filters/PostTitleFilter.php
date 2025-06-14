@@ -2,6 +2,10 @@
 
 namespace Jankx\Gutenberg\Filters;
 
+if (!defined('ABSPATH')) {
+    exit('Cheatin huh?');
+}
+
 use Jankx\Blocks\GutenbergFilterAbstract;
 
 class PostTitleFilter extends GutenbergFilterAbstract

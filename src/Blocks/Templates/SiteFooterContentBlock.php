@@ -2,6 +2,10 @@
 
 namespace Jankx\Gutenberg\Blocks\Templates;
 
+if (!defined('ABSPATH')) {
+    exit('Cheatin huh?');
+}
+
 use Jankx\Blocks\BlockAbstract;
 
 class SiteFooterContentBlock extends BlockAbstract

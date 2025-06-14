@@ -1,4 +1,7 @@
 <?php
+if (!defined('ABSPATH')) {
+    exit('Cheatin huh?');
+}
 
 function jankx_generate_gutenberg_templates($fileName) {
     return [dirname(JANKX_GUTENBERG_BOOT_FILE) . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR  .'page.html'];
