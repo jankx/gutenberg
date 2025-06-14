@@ -1,6 +1,6 @@
 <?php
 if (!defined('ABSPATH')) {
-    exit('Cheatin huh?');
+    exit('Cheating huh?');
 }
 use Jankx\Gutenberg\Gutenberg;
 if (!function_exists('locate_block_template')) {

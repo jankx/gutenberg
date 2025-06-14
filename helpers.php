@@ -1,6 +1,6 @@
 <?php
 if (!defined('ABSPATH')) {
-    exit('Cheatin huh?');
+    exit('Cheating huh?');
 }
 
 function jankx_generate_gutenberg_templates($fileName) {

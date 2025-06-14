@@ -3,7 +3,7 @@
 namespace Jankx\Gutenberg\Blocks;
 
 if (!defined('ABSPATH')) {
-    exit('Cheatin huh?');
+    exit('Cheating huh?');
 }
 
 use Jankx\Blocks\BlockAbstract;
