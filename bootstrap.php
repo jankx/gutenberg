@@ -2,7 +2,10 @@
 if (!defined('ABSPATH')) {
     exit('Cheating huh?');
 }
+
+use Jankx\Jankx;
 use Jankx\Gutenberg\Gutenberg;
+
 if (!function_exists('locate_block_template')) {
     return;
 }
