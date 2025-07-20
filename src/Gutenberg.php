@@ -6,7 +6,7 @@ if (!defined('ABSPATH')) {
     exit('Cheating huh?');
 }
 
-use Jankx;
+use Jankx\Jankx;
 use Jankx\Blocks\BlockInterface;
 use Jankx\Blocks\GutenbergFilterInterface;
 use Jankx\Gutenberg\Blocks\ContactForm7Block;
